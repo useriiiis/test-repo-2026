@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -84,7 +83,7 @@
   /* ==== POSTER (A3 ratio: 1 : √2 ≈ 1.414) ==== */
   .poster {
     width: 800px;
-    height: 1131px;
+    min-height: 1131px;
     background: var(--cream);
     position: relative;
     overflow: hidden;
@@ -131,19 +130,50 @@
     letter-spacing: 3px;
     color: var(--ink);
   }
-  .issue {
-    font-family: 'DM Serif Display', serif;
-    font-size: 14px;
+  .issue-stamp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .issue-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--coral);
+    letter-spacing: -1px;
+  }
+  .issue-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.15;
+  }
+  .issue-meta .lbl {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    font-weight: 700;
     color: var(--muted);
+    text-transform: uppercase;
+  }
+  .issue-meta .val {
+    font-family: 'DM Serif Display', serif;
     font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .issue-stamp::before {
+    content: '';
+    width: 1px;
+    height: 38px;
+    background: var(--line);
   }
 
   /* ====== HERO SECTION ====== */
   .hero {
-    padding: 36px 50px 30px;
+    padding: 28px 50px 24px;
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    gap: 40px;
+    gap: 36px;
     align-items: end;
     position: relative;
   }
@@ -273,10 +303,10 @@
 
   /* ====== STRATEGY CARDS ====== */
   .cards {
-    padding: 32px 50px 24px;
+    padding: 22px 50px 16px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 18px;
   }
   .card {
     padding: 24px 24px 22px;
@@ -320,6 +350,67 @@
   .card-teal h3 { color: var(--teal); }
   .card-teal p { color: var(--teal); opacity: .8; }
 
+  /* ====== SOURCES / RESEARCH BAND ====== */
+  .sources {
+    margin: 0 50px 20px;
+    padding: 18px 22px;
+    background: var(--paper);
+    border: 1px dashed rgba(0,0,0,.18);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .sources-kicker {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-right: 18px;
+    border-right: 1px solid var(--line);
+  }
+  .sources-kicker .sk-top {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: .5px;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .sources-kicker .sk-bot {
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .sources-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .src-item {
+    font-size: 10.5px;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .src-item b {
+    display: block;
+    color: var(--coral);
+    font-size: 11px;
+    margin-bottom: 2px;
+    letter-spacing: .2px;
+  }
+  .src-item:nth-child(2) b { color: var(--teal); }
+  .src-item:nth-child(3) b { color: var(--gold); }
+  .src-item i {
+    display: block;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
   /* ====== QR / CTA BAR ====== */
   .cta-bar {
     margin: 0 50px;
@@ -349,11 +440,12 @@
     flex-shrink: 0;
     position: relative;
     z-index: 2;
+    box-shadow: 0 0 0 2px var(--gold);
   }
-  #qrcode { width: 84px; height: 84px; }
-  #qrcode img, #qrcode canvas {
-    display: block !important;
-    width: 84px !important; height: 84px !important;
+  .qr-wrap img {
+    display: block;
+    width: 96px;
+    height: 96px;
   }
   .cta-text { position: relative; z-index: 2; }
   .cta-text .kicker {
@@ -447,7 +539,13 @@
       <div class="brand-dot"></div>
       <span class="brand-text">PRIVACY MATTERS · 2026</span>
     </div>
-    <span class="issue">Issue N°01 · The Explainer</span>
+    <div class="issue-stamp">
+      <div class="issue-num">N°01</div>
+      <div class="issue-meta">
+        <span class="lbl">The Explainer</span>
+        <span class="val">A public privacy campaign</span>
+      </div>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -514,10 +612,35 @@
     </div>
   </div>
 
+  <!-- SOURCES / RESEARCH -->
+  <div class="sources">
+    <div class="sources-kicker">
+      <span class="sk-top">Based on<br>research</span>
+      <span class="sk-bot">Peer-reviewed · 3 sources</span>
+    </div>
+    <div class="sources-list">
+      <div class="src-item">
+        <b>Zhu et al. (2025)</b>
+        Social-media openness significantly raises identity-theft and unlawful data-access risk.
+        <i>Poll · Computers &amp; Security</i>
+      </div>
+      <div class="src-item">
+        <b>Nicol et al. (2022)</b>
+        Combined digital traces across Facebook, LinkedIn &amp; Tinder reveal unexpected private details.
+        <i>New Media &amp; Society</i>
+      </div>
+      <div class="src-item">
+        <b>Jia &amp; Xu (2016)</b>
+        Adjusting privacy settings reduces risk while keeping social connections alive.
+        <i>Information Systems Research</i>
+      </div>
+    </div>
+  </div>
+
   <!-- QR + CTA -->
   <div class="cta-bar">
     <div class="qr-wrap">
-      <div id="qrcode"></div>
+      <img src="qrcode.png" alt="QR code to useriiiis.github.io/test-repo-2026">
     </div>
     <div class="cta-text">
       <div class="kicker">FREE · 60 SECONDS · NO SIGN-UP</div>
@@ -537,17 +660,6 @@
 </div>
 
 <script>
-  /* === Generate QR code pointing to the interactive web === */
-  const target = location.origin + location.pathname.replace(/poster\.html$/, 'index.html');
-  new QRCode(document.getElementById('qrcode'), {
-    text: target,
-    width: 84,
-    height: 84,
-    colorDark: '#000',
-    colorLight: '#fff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
-
   /* === Download helpers (PNG / PDF) === */
   async function renderCanvas() {
     const node = document.getElementById('poster');
@@ -584,9 +696,11 @@
       const canvas = await renderCanvas();
       const imgData = canvas.toDataURL('image/jpeg', 0.95);
       const { jsPDF } = window.jspdf;
-      // A3 portrait: 297 × 420 mm
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a3' });
-      pdf.addImage(imgData, 'JPEG', 0, 0, 297, 420);
+      // Match real canvas ratio; width = A3 297mm, height scales
+      const mmWidth = 297;
+      const mmHeight = (canvas.height / canvas.width) * mmWidth;
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [mmWidth, mmHeight] });
+      pdf.addImage(imgData, 'JPEG', 0, 0, mmWidth, mmHeight);
       pdf.save('stop-oversharing-poster-by-Mikey.pdf');
     } catch (e) {
       alert('Download failed: ' + e.message);
