@@ -111,7 +111,7 @@
 
   /* ====== TOP HEADER BAR ====== */
   .header-bar {
-    padding: 20px 48px 16px;
+    padding: 16px 44px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -133,52 +133,64 @@
     letter-spacing: 3px;
     color: var(--ink);
   }
-  .issue-stamp {
+  /* === Top-right QR scanner block === */
+  .scan-stamp {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
   }
-  .issue-num {
+  .scan-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.1;
+    gap: 3px;
+  }
+  .scan-arrow {
     font-family: 'Fraunces', serif;
     font-weight: 900;
     font-variation-settings: 'opsz' 144, 'SOFT' 20;
-    font-size: 38px;
+    font-size: 26px;
     line-height: 1;
     color: var(--coral);
-    letter-spacing: -2px;
+    letter-spacing: -1px;
   }
-  .issue-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    line-height: 1.15;
+  .scan-arrow em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
   }
-  .issue-meta .lbl {
-    font-size: 9px;
-    letter-spacing: 2.5px;
+  .scan-meta {
+    font-size: 8.5px;
+    letter-spacing: 2px;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
   }
-  .issue-meta .val {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: var(--ink);
+  .scan-qr {
+    background: #fff;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow:
+      0 0 0 2px var(--coral),
+      0 8px 20px rgba(0,0,0,.12);
+    transform: rotate(-2deg);
+    transition: transform .2s ease;
   }
-  .issue-stamp::before {
-    content: '';
-    width: 1px;
-    height: 38px;
-    background: var(--line);
+  .scan-qr:hover { transform: rotate(0deg) scale(1.04); }
+  .scan-qr img {
+    display: block;
+    width: 64px;
+    height: 64px;
   }
 
   /* ====== HERO SECTION ====== */
   .hero {
-    padding: 22px 48px 20px;
+    padding: 18px 48px 18px;
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    gap: 32px;
+    gap: 30px;
     align-items: end;
     position: relative;
     flex: 1;
@@ -199,11 +211,11 @@
     font-family: 'Fraunces', 'Playfair Display', serif;
     font-weight: 900;
     font-variation-settings: 'opsz' 144, 'SOFT' 30;
-    font-size: 70px;
+    font-size: 64px;
     line-height: .94;
     letter-spacing: -2.5px;
     color: var(--ink);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .hero h1 em {
     font-style: italic;
@@ -442,16 +454,16 @@
     margin-top: 2px;
   }
 
-  /* ====== QR / CTA BAR ====== */
+  /* ====== CTA BAR (QR is now in header) ====== */
   .cta-bar {
     margin: 0 48px;
     background: var(--ink);
     color: var(--cream);
-    border-radius: 18px;
-    padding: 18px 24px;
+    border-radius: 16px;
+    padding: 16px 26px;
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px;
+    grid-template-columns: 1fr auto;
+    gap: 22px;
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -463,20 +475,6 @@
     width: 180px; height: 180px;
     background: radial-gradient(circle, var(--coral) 0%, transparent 70%);
     opacity: .25;
-  }
-  .qr-wrap {
-    background: #fff;
-    padding: 8px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 0 2px var(--gold);
-  }
-  .qr-wrap img {
-    display: block;
-    width: 88px;
-    height: 88px;
   }
   .cta-text { position: relative; z-index: 2; }
   .cta-text .kicker {
@@ -494,7 +492,7 @@
     font-variation-settings: 'opsz' 144, 'SOFT' 30;
     font-size: 32px;
     line-height: 1;
-    letter-spacing: -1.2px;
+    letter-spacing: -1.4px;
     margin-bottom: 4px;
   }
   .cta-text h2 em {
@@ -511,7 +509,7 @@
   .arrow-big {
     font-family: 'Fraunces', serif;
     font-weight: 900;
-    font-size: 54px;
+    font-size: 60px;
     color: var(--gold);
     line-height: 1;
     position: relative;
@@ -578,13 +576,15 @@
   <div class="header-bar">
     <div class="brand">
       <div class="brand-dot"></div>
-      <span class="brand-text">PRIVACY MATTERS · 2026</span>
+      <span class="brand-text">PRIVACY MATTERS · N°01 · 2026</span>
     </div>
-    <div class="issue-stamp">
-      <div class="issue-num">N°01</div>
-      <div class="issue-meta">
-        <span class="lbl">The Explainer</span>
-        <span class="val">A public privacy campaign</span>
+    <div class="scan-stamp">
+      <div class="scan-text">
+        <span class="scan-arrow">Scan <em>me</em> →</span>
+        <span class="scan-meta">Free · 60 sec · No sign-up</span>
+      </div>
+      <div class="scan-qr">
+        <img src="qrcode.png" alt="QR code — scan to open the privacy website">
       </div>
     </div>
   </div>
@@ -679,15 +679,12 @@
     </div>
   </div>
 
-  <!-- QR + CTA -->
+  <!-- CTA -->
   <div class="cta-bar">
-    <div class="qr-wrap">
-      <img src="qrcode.png" alt="QR code to useriiiis.github.io/test-repo-2026">
-    </div>
     <div class="cta-text">
-      <div class="kicker">Free · 60 Seconds · No Sign-up</div>
-      <h2>Scan me.<br><em>Protect</em> yourself.</h2>
-      <p>Play the privacy game. Chat with Privacy AI. Change one setting tonight.</p>
+      <div class="kicker">Tonight · One Small Change</div>
+      <h2>Don't overshare.<br><em>Protect</em> yourself tonight.</h2>
+      <p>Scan the QR at the top. Play the privacy game. Chat with Privacy AI.</p>
     </div>
     <div class="arrow-big">→</div>
   </div>
