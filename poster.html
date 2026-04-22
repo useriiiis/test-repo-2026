@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STOP OVERSHARING — Persuasive Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #222;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 10px;
+    min-height: 100vh;
+  }
+  .poster {
+    width: 720px;
+    /* A2-ish ratio, scaled for screen */
+    aspect-ratio: 3 / 4;
+    background: #0a0e1a;
+    color: #e8f0ff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0, 255, 148, 0.25);
+    border: 2px solid #00ff94;
+  }
+
+  /* Background grid */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 148, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 148, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+  }
+  .scan {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,255,148,0.08) 50%, transparent 100%);
+    background-size: 100% 200%;
+    animation: scan 5s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes scan {
+    from { background-position: 0 -100%; }
+    to { background-position: 0 100%; }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Top tag */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #00ff94;
+  }
+  .top .left::before { content: '◉ '; color: #ff4757; }
+
+  /* Headline */
+  .headline {
+    margin-top: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -1px;
+  }
+  .headline .line1 {
+    font-size: 58px;
+    color: #ff4757;
+    text-shadow: 0 0 30px rgba(255, 71, 87, 0.5);
+  }
+  .headline .line2 {
+    font-size: 86px;
+    color: #00ff94;
+    text-shadow: 0 0 30px rgba(0, 255, 148, 0.6);
+  }
+  .headline .line3 {
+    font-size: 36px;
+    color: #e8f0ff;
+    margin-top: 6px;
+  }
+
+  /* Hero image */
+  .hero-img {
+    margin-top: 24px;
+    height: 230px;
+    border: 2px solid #1a2138;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .phone {
+    width: 180px;
+    height: 200px;
+    background: linear-gradient(135deg, #111827, #1a2138);
+    border: 3px solid #00ff94;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 255, 148, 0.4);
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 4px;
+    background: #333;
+    border-radius: 2px;
+  }
+  .phone-screen {
+    position: absolute;
+    inset: 20px 10px 10px;
+    background: #000;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 9px;
+    color: #00ff94;
+    font-family: 'Orbitron', monospace;
+    overflow: hidden;
+  }
+  .leak-line { margin-bottom: 2px; animation: glitch 3s infinite; }
+  .leak-line:nth-child(2) { animation-delay: 0.3s; }
+  .leak-line:nth-child(3) { animation-delay: 0.6s; color: #ff4757; }
+  .leak-line:nth-child(4) { animation-delay: 0.9s; }
+  .leak-line:nth-child(5) { animation-delay: 1.2s; color: #ff4757; }
+  .leak-line:nth-child(6) { animation-delay: 1.5s; }
+  .leak-line:nth-child(7) { animation-delay: 1.8s; color: #ff4757; }
+  @keyframes glitch {
+    0%, 100% { opacity: 1; transform: translateX(0); }
+    50% { opacity: 0.3; transform: translateX(1px); }
+  }
+
+  .leak-tags {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .leak-tag {
+    position: absolute;
+    background: rgba(255, 71, 87, 0.15);
+    border: 1px solid #ff4757;
+    color: #ff4757;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    animation: tagFloat 3s ease-in-out infinite;
+  }
+  .t1 { top: 15%; left: 8%; }
+  .t2 { top: 25%; right: 10%; animation-delay: 0.5s; }
+  .t3 { bottom: 30%; left: 10%; animation-delay: 1s; }
+  .t4 { bottom: 15%; right: 8%; animation-delay: 1.5s; }
+  @keyframes tagFloat {
+    0%, 100% { transform: translateY(0); opacity: 0.8; }
+    50% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* Strategies */
+  .strategies {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .strat {
+    padding: 14px;
+    background: rgba(0, 255, 148, 0.06);
+    border: 1px solid #00ff94;
+    border-radius: 10px;
+  }
+  .strat-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #00ff94;
+    margin-bottom: 4px;
+  }
+  .strat-text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .strat-cite {
+    font-size: 10px;
+    color: #8891a8;
+    margin-top: 4px;
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: auto;
+    background: #ffd700;
+    color: #000;
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, #ffd700, #ff4757, #00ff94, #ffd700);
+    background-size: 200% 200%;
+    z-index: -1;
+    border-radius: 14px;
+    animation: borderShift 4s linear infinite;
+  }
+  @keyframes borderShift {
+    to { background-position: 200% 200%; }
+  }
+  .qr-box {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .qr-box #qrcode img,
+  .qr-box #qrcode canvas {
+    display: block;
+    width: 110px !important;
+    height: 110px !important;
+  }
+  .cta-text h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .cta-text p {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .cta-text .free {
+    display: inline-block;
+    background: #000;
+    color: #ffd700;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    margin-top: 6px;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid #1a2138;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #8891a8;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+  }
+
+  /* Print */
+  .print-bar {
+    position: fixed;
+    top: 10px; right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 999;
+  }
+  .print-bar button {
+    padding: 10px 18px;
+    background: #00ff94;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  .print-bar button:hover { background: #00e085; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .poster { box-shadow: none; border: none; }
+    .print-bar { display: none; }
+  }
+
+  @media (max-width: 760px) {
+    .poster { width: 100%; }
+    .headline .line1 { font-size: 38px; }
+    .headline .line2 { font-size: 54px; }
+    .headline .line3 { font-size: 22px; }
+    .strategies { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <button onclick="window.print()">🖨 Print / Save PDF</button>
+  <button onclick="location.href='index.html'">← Back to Web</button>
+</div>
+
+<div class="poster">
+  <div class="grid"></div>
+  <div class="scan"></div>
+
+  <div class="content">
+
+    <div class="top">
+      <span class="left">PRIVACY ALERT // 2026</span>
+      <span>EELC2010 · STOP OVERSHARING</span>
+    </div>
+
+    <div class="headline">
+      <div class="line1">EVERY POST</div>
+      <div class="line2">YOU SHARE</div>
+      <div class="line3">is a puzzle piece someone else collects.</div>
+    </div>
+
+    <div class="hero-img">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="leak-line">&gt; SCAN: @leo_hs18.jpg</div>
+          <div class="leak-line">&gt; DOB: 15/03/2008</div>
+          <div class="leak-line">&gt; LEAK: Mother's maiden name</div>
+          <div class="leak-line">&gt; LOC: 22.28°N, 114.17°E</div>
+          <div class="leak-line">&gt; LEAK: Home address</div>
+          <div class="leak-line">&gt; PATTERN: Mon 14:00 Rm301</div>
+          <div class="leak-line">&gt; LEAK: Identity theft risk 94%</div>
+        </div>
+      </div>
+      <div class="leak-tags">
+        <span class="leak-tag t1">📍 LOCATION</span>
+        <span class="leak-tag t2">🎂 BIRTHDAY</span>
+        <span class="leak-tag t3">🏫 SCHOOL</span>
+        <span class="leak-tag t4">👥 FRIENDS</span>
+      </div>
+    </div>
+
+    <div class="strategies">
+      <div class="strat">
+        <div class="strat-label">⚡ RECIPROCITY</div>
+        <div class="strat-text">Scan for a FREE privacy game &amp; AI chat that checks your risk in 60s.</div>
+        <div class="strat-cite">Your data stays on your device.</div>
+      </div>
+      <div class="strat">
+        <div class="strat-label">✓ CONSISTENCY</div>
+        <div class="strat-text">You don't need to quit social media. Just adjust one setting tonight.</div>
+        <div class="strat-cite">(Jia &amp; Xu, 2016)</div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="qr-box">
+        <div id="qrcode"></div>
+      </div>
+      <div class="cta-text">
+        <h3>SCAN TO<br>PROTECT YOURSELF</h3>
+        <p>Play the 60-sec Privacy Game<br>+ Chat with Privacy AI</p>
+        <span class="free">FREE · 60 SEC</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Zhu et al. (2025) · Jia &amp; Xu (2016) · Nicol et al. (2022)</span>
+      <span>SCAN ME →</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Generate QR code pointing to the web page.
+  // When served from GitHub Pages at https://useriiiis.github.io/test-repo-2026/
+  // the QR will deep-link to the index page so phone users can open the game + AI.
+  const targetUrl = location.origin + location.pathname.replace(/poster\.html$/, 'index.html');
+  new QRCode(document.getElementById('qrcode'), {
+    text: targetUrl,
+    width: 110,
+    height: 110,
+    colorDark: '#000',
+    colorLight: '#fff',
+    correctLevel: QRCode.CorrectLevel.H
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stop Oversharing | Protect Your Digital Life</title>
+<meta name="description" content="Interactive web to help high schoolers understand the risks of oversharing on social media.">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ====== Navigation ====== -->
+<nav class="navbar">
+  <div class="logo">
+    <span class="logo-glow">&lt;/&gt;</span> STOP OVERSHARING
+  </div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#learn">Learn</a>
+    <a href="#game">Game</a>
+    <a href="#ai">AI Chat</a>
+    <a href="#action">Act Now</a>
+    <a href="poster.html" target="_blank" class="poster-link">View Poster</a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section id="hero" class="hero">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+    <div class="scanline"></div>
+  </div>
+  <div class="hero-content">
+    <div class="alert-tag">⚠ PRIVACY WARNING</div>
+    <h1>Every <span class="glow-red">post</span> you share<br>is a <span class="glow-green">puzzle piece</span><br>someone else collects.</h1>
+    <p class="hero-sub">An 18-year-old posts 6× a day on Instagram.<br>That's <b>2,190 puzzle pieces</b> a year — enough to steal their identity.</p>
+    <div class="hero-cta">
+      <a href="#game" class="btn btn-primary">▶ Play the Privacy Game</a>
+      <a href="#ai" class="btn btn-secondary">💬 Chat with Privacy AI</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="num">80%</span><span class="lbl">users at risk of identity theft<br><i>(Zhu et al., 2025)</i></span></div>
+      <div class="stat"><span class="num">3</span><span class="lbl">platforms combined reveal<br>your whole routine<br><i>(Nicol et al., 2022)</i></span></div>
+      <div class="stat"><span class="num">1</span><span class="lbl">small change tonight<br>= huge safety boost<br><i>(Jia &amp; Xu, 2016)</i></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== LEARN: PROCESS FLOW ====== -->
+<section id="learn" class="section">
+  <div class="section-header">
+    <span class="section-tag">STEP 1 — LEARN</span>
+    <h2>How a single post becomes a <span class="glow-green">data leak</span></h2>
+  </div>
+
+  <div class="process-flow">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h3>You post a selfie</h3>
+      <p>Caption: "Stressed but surviving finals at Room 301, DSEJ Library 📚"</p>
+      <div class="post-mock">
+        <div class="post-header"><div class="avatar"></div><span>@leo_hs18</span></div>
+        <div class="post-img">📸</div>
+        <p class="post-caption">"Stressed but surviving finals at Room 301, DSEJ Library 📚"</p>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3>Traces combine</h3>
+      <p>Instagram + LinkedIn + Tinder = your <b>full routine</b>. Strangers know where you are every Monday at 2 PM.</p>
+      <div class="leak-visual">
+        <span class="leak-tag">📍 Location</span>
+        <span class="leak-tag">🕐 Time</span>
+        <span class="leak-tag">🏫 School</span>
+        <span class="leak-tag">📱 Phone type</span>
+        <span class="leak-tag">👥 Friends</span>
+        <span class="leak-tag">💼 Future job</span>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3>Data is exploited</h3>
+      <p>Identity theft. Cyberbullying. Stalkers. Unwanted attention.</p>
+      <div class="danger-icons">
+        <div class="danger">🎭<br><small>Identity<br>Theft</small></div>
+        <div class="danger">😨<br><small>Cyber<br>bullying</small></div>
+        <div class="danger">👁️<br><small>Stalkers</small></div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="process-step highlight">
+      <div class="step-num">04</div>
+      <h3>You take back control</h3>
+      <p>One small change tonight: review privacy settings &amp; post to <b>close friends only</b>.</p>
+      <div class="solution-badge">✓ SAFE</div>
+    </div>
+  </div>
+
+  <div class="citations-bar">
+    <b>Research evidence:</b>
+    Digital traces across platforms reveal unexpected details (Nicol et al., 2022).
+    Social media openness puts users at risk for identity theft (Zhu et al., 2025).
+    Adjusting privacy settings reduces risks while keeping social connections (Jia &amp; Xu, 2016).
+  </div>
+</section>
+
+<!-- ====== GAME ====== -->
+<section id="game" class="section dark-section">
+  <div class="section-header">
+    <span class="section-tag">STEP 2 — PLAY</span>
+    <h2>🎮 Share or Delete? <span class="glow-green">The Privacy Game</span></h2>
+    <p class="section-desc">5 posts. Decide which are safe to share publicly.<br>Think like a hacker would.</p>
+  </div>
+
+  <div class="game-container">
+    <div class="game-hud">
+      <div class="hud-item">Score: <span id="score">0</span>/5</div>
+      <div class="hud-item">Round: <span id="round">1</span>/5</div>
+      <div class="hud-item">Risk Level: <span id="risk" class="risk-low">LOW</span></div>
+    </div>
+
+    <div id="game-card" class="game-card">
+      <!-- dynamically filled -->
+    </div>
+
+    <div id="game-buttons" class="game-buttons">
+      <button class="btn btn-danger" onclick="answer('share')">📤 SHARE PUBLIC</button>
+      <button class="btn btn-safe" onclick="answer('delete')">🗑️ KEEP PRIVATE</button>
+    </div>
+
+    <div id="game-result" class="game-result hidden"></div>
+
+    <div id="game-end" class="game-end hidden">
+      <h3>🏁 Game Over!</h3>
+      <p>Your final score: <span id="final-score"></span>/5</p>
+      <p id="final-verdict"></p>
+      <button class="btn btn-primary" onclick="resetGame()">🔁 Play Again</button>
+    </div>
+  </div>
+</section>
+
+<!-- ====== AI CHAT ====== -->
+<section id="ai" class="section">
+  <div class="section-header">
+    <span class="section-tag">STEP 3 — ASK AI</span>
+    <h2>💬 Chat with <span class="glow-green">Privacy AI</span></h2>
+    <p class="section-desc">Ask anything about social media privacy.<br>Powered by DeepSeek AI.</p>
+  </div>
+
+  <div class="chat-container">
+    <div id="chat-box" class="chat-box">
+      <div class="msg msg-ai">
+        <div class="msg-avatar">🤖</div>
+        <div class="msg-bubble">
+          Hi! I'm your Privacy AI. Ask me things like:<br>
+          • "Is it safe to post my location?"<br>
+          • "What info should I never share?"<br>
+          • "How do I check my Instagram privacy?"<br>
+          <br>I'll give you straight answers based on research 🔒
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-bar">
+      <input type="text" id="chat-input" placeholder="Type your privacy question..." onkeydown="if(event.key==='Enter') sendMessage()">
+      <button class="btn btn-primary" onclick="sendMessage()">Send ➤</button>
+    </div>
+
+    <div class="chat-suggestions">
+      <button class="chip" onclick="quickAsk('Is it safe to post my school location on Instagram?')">Is posting my school safe?</button>
+      <button class="chip" onclick="quickAsk('What are the 3 things I should never share online?')">3 things never to share</button>
+      <button class="chip" onclick="quickAsk('How do I make my Instagram posts close friends only?')">Instagram Close Friends?</button>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ACT NOW ====== -->
+<section id="action" class="section action-section">
+  <div class="section-header">
+    <span class="section-tag">STEP 4 — ACT TONIGHT</span>
+    <h2>One small change. <span class="glow-green">Big safety boost.</span></h2>
+  </div>
+
+  <div class="action-grid">
+    <div class="action-card">
+      <div class="action-num">1</div>
+      <h3>Open settings</h3>
+      <p>Go to Instagram → Settings → Privacy → Account Privacy → <b>Private</b>.</p>
+    </div>
+    <div class="action-card">
+      <div class="action-num">2</div>
+      <h3>Close Friends only</h3>
+      <p>For stories, switch from "Public" to <b>"Close Friends"</b>. Instantly 90% safer.</p>
+    </div>
+    <div class="action-card">
+      <div class="action-num">3</div>
+      <h3>Before posting, ask:</h3>
+      <p>"Is this info <b>really</b> necessary to share? Could a stranger use it?"</p>
+    </div>
+  </div>
+
+  <div class="final-cta">
+    <p>You don't have to quit social media.<br>You just have to be <span class="glow-green">mindful</span>.</p>
+    <p class="pledge">✓ I pledge to review my privacy settings tonight.</p>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <p><b>EELC2010 — The Explainer Project</b> · Stop Oversharing Campaign</p>
+  <p class="refs">
+    Jia, H., &amp; Xu, H. (2016). · Nicol et al. (2022). · Zhu et al. (2025).
+  </p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
