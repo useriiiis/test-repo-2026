@@ -140,63 +140,79 @@
     <p class="section-sub">Eight real posts. Decide which are safe to share publicly. Compete on the leaderboard below.</p>
   </div>
 
-  <div class="game-frame">
+  <div class="game-layout">
 
-    <!-- Start screen: name entry -->
-    <div id="game-start" class="game-screen">
-      <div class="start-card">
-        <div class="start-kicker">● Enter your name to start</div>
-        <h3>Ready to play?</h3>
-        <p>You'll see 8 fake Instagram posts. Guess which are safe to share — and learn why each choice matters.</p>
-        <input id="player-name" maxlength="20" placeholder="Your name or nickname" autocomplete="off">
-        <button class="btn btn-primary btn-full" onclick="startGame()">Start the game →</button>
-        <small class="start-note">You'll be added to the global leaderboard when you finish.</small>
-      </div>
-    </div>
+    <!-- ============ LEFT: GAME ============ -->
+    <div class="game-frame">
 
-    <!-- Playing screen -->
-    <div id="game-play" class="game-screen hidden">
-      <div class="hud">
-        <div class="hud-item"><span class="hud-lbl">Player</span><span id="hud-name" class="hud-val">—</span></div>
-        <div class="hud-item"><span class="hud-lbl">Score</span><span class="hud-val"><span id="score">0</span>/8</span></div>
-        <div class="hud-item"><span class="hud-lbl">Round</span><span class="hud-val"><span id="round">1</span>/8</span></div>
-        <div class="hud-item"><span class="hud-lbl">Time</span><span id="timer" class="hud-val">0s</span></div>
-      </div>
-
-      <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
-
-      <div id="game-card" class="card-stack"></div>
-
-      <div id="game-buttons" class="choice-row">
-        <button class="btn btn-coral" onclick="answer('share')">📤 Share Public</button>
-        <button class="btn btn-teal"  onclick="answer('delete')">🔒 Keep Private</button>
-      </div>
-
-      <div id="game-result" class="game-result hidden"></div>
-    </div>
-
-    <!-- End screen: leaderboard -->
-    <div id="game-end" class="game-screen hidden">
-      <div class="end-card">
-        <div class="end-kicker" id="end-kicker">● Game over</div>
-        <h3 id="end-title">Well played!</h3>
-        <div class="end-score"><span id="final-score">0</span><span class="end-score-max">/8</span></div>
-        <p id="end-verdict" class="end-verdict"></p>
-
-        <h4 class="lb-title">Leaderboard</h4>
-        <div class="lb-tabs">
-          <button class="lb-tab active" data-lb="global" onclick="switchBoard('global', event)">🌐 Global</button>
-          <button class="lb-tab" data-lb="local" onclick="switchBoard('local', event)">📱 This device</button>
-        </div>
-        <div id="leaderboard" class="leaderboard"></div>
-        <small id="lb-note" class="lb-note"></small>
-
-        <div class="end-actions">
-          <button class="btn btn-primary" onclick="resetGame()">Play again</button>
-          <button class="btn btn-ghost" onclick="shareScore()">Share my score</button>
+      <!-- Start screen: name entry -->
+      <div id="game-start" class="game-screen">
+        <div class="start-card">
+          <div class="start-kicker">● Enter your name to start</div>
+          <h3>Ready to play?</h3>
+          <p>You'll see 8 fake Instagram posts. Guess which are safe to share — and learn why each choice matters.</p>
+          <input id="player-name" maxlength="20" placeholder="Your name or nickname" autocomplete="off">
+          <button class="btn btn-primary btn-full" onclick="startGame()">Start the game →</button>
+          <small class="start-note">You'll be added to the live leaderboard when you finish.</small>
         </div>
       </div>
+
+      <!-- Playing screen -->
+      <div id="game-play" class="game-screen hidden">
+        <div class="hud">
+          <div class="hud-item"><span class="hud-lbl">Player</span><span id="hud-name" class="hud-val">—</span></div>
+          <div class="hud-item"><span class="hud-lbl">Score</span><span class="hud-val"><span id="score">0</span>/8</span></div>
+          <div class="hud-item"><span class="hud-lbl">Round</span><span class="hud-val"><span id="round">1</span>/8</span></div>
+          <div class="hud-item"><span class="hud-lbl">Time</span><span id="timer" class="hud-val">0s</span></div>
+        </div>
+
+        <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+
+        <div id="game-card" class="card-stack"></div>
+
+        <div id="game-buttons" class="choice-row">
+          <button class="btn btn-coral" onclick="answer('share')">📤 Share Public</button>
+          <button class="btn btn-teal"  onclick="answer('delete')">🔒 Keep Private</button>
+        </div>
+
+        <div id="game-result" class="game-result hidden"></div>
+      </div>
+
+      <!-- End screen -->
+      <div id="game-end" class="game-screen hidden">
+        <div class="end-card">
+          <div class="end-kicker" id="end-kicker">● Game over</div>
+          <h3 id="end-title">Well played!</h3>
+          <div class="end-score"><span id="final-score">0</span><span class="end-score-max">/8</span></div>
+          <p id="end-verdict" class="end-verdict"></p>
+          <div class="end-actions">
+            <button class="btn btn-primary" onclick="resetGame()">Play again</button>
+            <button class="btn btn-ghost" onclick="shareScore()">Share my score</button>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <!-- ============ RIGHT: LIVE LEADERBOARD ============ -->
+    <aside class="live-lb">
+      <header class="lb-head">
+        <div class="lb-live">
+          <span class="live-dot"></span>
+          <span class="live-label">LIVE</span>
+        </div>
+        <h4>Leaderboard</h4>
+        <span class="lb-refresh" id="lb-refresh" title="Refresh now" onclick="refreshBoard(true)">↻</span>
+      </header>
+
+      <div class="lb-tabs">
+        <button class="lb-tab active" data-lb="global" onclick="switchBoard('global', event)">🌐 Global</button>
+        <button class="lb-tab" data-lb="local" onclick="switchBoard('local', event)">📱 Mine</button>
+      </div>
+
+      <div id="leaderboard" class="leaderboard"></div>
+      <small id="lb-note" class="lb-note"></small>
+    </aside>
 
   </div>
 </section>

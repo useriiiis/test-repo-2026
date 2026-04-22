@@ -13,15 +13,22 @@ const LB_ENDPOINT = 'https://jsonblob.com/api/jsonBlob/019db646-9c74-704b-be9c-7
 //   If blob is gone / rate-limited, local leaderboard still works.
 
 const LB_LOCAL_KEY = 'oversharing.lb.local.v2';
-let globalBoardCache = null;   // in-memory cache to avoid hammering the API
+const LB_POLL_MS = 15000;      // auto-refresh every 15 s
+let globalBoardCache = null;
+let lastFetchTs = 0;
+let lbTimer = null;
 
-async function fetchGlobalBoard() {
-  if (globalBoardCache) return globalBoardCache;
+async function fetchGlobalBoard(force = false) {
+  // cache 8 s by default so the sidebar polling is cheap
+  if (!force && globalBoardCache && (Date.now() - lastFetchTs) < 8000) {
+    return globalBoardCache;
+  }
   try {
     const r = await fetch(LB_ENDPOINT, { cache: 'no-store' });
     if (!r.ok) throw new Error('lb fetch ' + r.status);
     const data = await r.json();
     globalBoardCache = Array.isArray(data) ? data : (data.rows || []);
+    lastFetchTs = Date.now();
     return globalBoardCache;
   } catch (e) {
     console.warn('Global leaderboard unavailable, using local only.', e);
@@ -145,6 +152,31 @@ function bootGameUI() {
   document.getElementById('game-start').classList.remove('hidden');
   document.getElementById('game-play').classList.add('hidden');
   document.getElementById('game-end').classList.add('hidden');
+  // Render leaderboard sidebar immediately on page load
+  renderBoard(currentTab);
+  startLbPolling();
+}
+
+/* Auto-refresh the live leaderboard — pauses when tab is hidden */
+function startLbPolling() {
+  stopLbPolling();
+  lbTimer = setInterval(() => {
+    if (document.visibilityState !== 'visible') return;
+    renderBoard(currentTab, /*silent=*/ true);
+  }, LB_POLL_MS);
+}
+function stopLbPolling() {
+  if (lbTimer) { clearInterval(lbTimer); lbTimer = null; }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') renderBoard(currentTab, true);
+});
+
+async function refreshBoard(userTriggered) {
+  const btn = document.getElementById('lb-refresh');
+  if (btn && userTriggered) { btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin'); }
+  globalBoardCache = null; // force refresh
+  await renderBoard(currentTab);
 }
 
 function startGame() {
@@ -268,25 +300,28 @@ async function switchBoard(tab, ev) {
   renderBoard(tab);
 }
 
-async function renderBoard(tab) {
+async function renderBoard(tab, silent = false) {
   const lbEl = document.getElementById('leaderboard');
   const noteEl = document.getElementById('lb-note');
-  lbEl.innerHTML = '<div class="lb-empty">Loading…</div>';
+  if (!lbEl) return;
+
+  if (!silent && !lbEl.innerHTML) {
+    lbEl.innerHTML = '<div class="lb-empty">Loading…</div>';
+  }
 
   let rows, note;
   if (tab === 'global') {
     const g = await fetchGlobalBoard();
     if (g === null) {
-      // fallback: remote failed
       rows = getLocalBoard();
-      note = "Global leaderboard is offline — showing this device's scores instead.";
+      note = "Global board is offline — showing this device's scores.";
     } else {
       rows = g;
-      note = `🌐 Global leaderboard · ${rows.length} players worldwide.`;
+      note = `🌐 ${rows.length} players worldwide · updated ${timeAgo(lastFetchTs)}`;
     }
   } else {
     rows = getLocalBoard();
-    note = `📱 Only the scores played on this device.`;
+    note = `📱 Scores played on this device only.`;
   }
 
   rows = [...rows]
@@ -305,13 +340,22 @@ async function renderBoard(tab) {
             <div class="lb-name">${escapeHtml(r.name)}</div>
             <div class="lb-time">${r.timeSec}s · ${formatWhen(r.at)}</div>
           </div>
-          <span class="lb-score">${r.score}</span>
-          <span class="lb-time">/${r.total || 8}</span>
+          <span class="lb-score">${r.score}<small style="opacity:.5;font-size:12px;">/${r.total || 8}</small></span>
         </div>
       `;
     }).join('');
   }
   noteEl.textContent = note;
+}
+
+function timeAgo(ts) {
+  if (!ts) return 'never';
+  const diff = Date.now() - ts;
+  if (diff < 5000) return 'just now';
+  const s = Math.floor(diff / 1000);
+  if (s < 60) return s + 's ago';
+  const m = Math.floor(s / 60);
+  return m + 'm ago';
 }
 
 function formatWhen(ts) {
