@@ -454,7 +454,7 @@
     margin-top: 2px;
   }
 
-  /* ====== CTA BAR (QR is now in header) ====== */
+  /* ====== CTA BAR (second QR + big text) ====== */
   .cta-bar {
     margin: 0 48px;
     background: var(--ink);
@@ -462,11 +462,25 @@
     border-radius: 16px;
     padding: 16px 26px;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 22px;
     align-items: center;
     position: relative;
     overflow: hidden;
+  }
+  .cta-qr {
+    background: #fff;
+    padding: 6px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .cta-qr img {
+    display: block;
+    width: 70px;
+    height: 70px;
   }
   .cta-bar::before {
     content: '';
@@ -680,10 +694,13 @@
 
   <!-- CTA -->
   <div class="cta-bar">
+    <div class="cta-qr">
+      <img src="qrcode.png" alt="QR code — scan to open the privacy website">
+    </div>
     <div class="cta-text">
       <div class="kicker">Tonight · One Small Change</div>
       <h2>Don't overshare. <em>Protect</em> yourself.</h2>
-      <p>Scan the QR above ↗ Play the game, chat with the AI.</p>
+      <p>Scan · play the game · chat with the Privacy AI.</p>
     </div>
     <div class="arrow-big">→</div>
   </div>
