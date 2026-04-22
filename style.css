@@ -213,23 +213,27 @@ img { max-width: 100%; display: block; }
 .hero-inner { max-width: 620px; }
 .hero-title {
   font-family: 'Fraunces', 'Playfair Display', serif;
-  font-weight: 400;
-  font-variation-settings: 'SOFT' 30, 'opsz' 144;
-  font-size: clamp(48px, 6.5vw, 86px);
+  font-weight: 500;
+  font-variation-settings: 'SOFT' 40, 'opsz' 144;
+  font-size: clamp(48px, 6.8vw, 92px);
   line-height: 1;
-  letter-spacing: -2.5px;
-  margin: 24px 0 24px;
+  letter-spacing: -3px;
+  margin: 24px 0 28px;
   color: var(--fg);
 }
 .hero-title em {
+  font-family: 'Instrument Serif', 'Fraunces', serif;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   color: var(--coral);
+  letter-spacing: -2px;
 }
 .hero-title .outline {
   color: transparent;
   -webkit-text-stroke: 1.5px var(--fg);
   font-style: italic;
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
 }
 .hero-lede {
   font-size: clamp(16px, 1.4vw, 19px);
@@ -381,15 +385,21 @@ img { max-width: 100%; display: block; }
 }
 .section-head h2 {
   font-family: 'Fraunces', serif;
-  font-weight: 400;
-  font-variation-settings: 'SOFT' 30;
+  font-weight: 500;
+  font-variation-settings: 'SOFT' 40, 'opsz' 144;
   font-size: clamp(38px, 5vw, 68px);
   line-height: 1.02;
-  letter-spacing: -2px;
+  letter-spacing: -2.5px;
   margin: 20px auto 16px;
   max-width: 860px;
 }
-.section-head h2 em { font-style: italic; font-weight: 300; color: var(--coral); }
+.section-head h2 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--coral);
+  letter-spacing: -1.5px;
+}
 .section-sub {
   font-size: 17px;
   color: var(--fg-mid);
@@ -1149,7 +1159,9 @@ img { max-width: 100%; display: block; }
   color: var(--fg);
 }
 .pledge-main em {
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
+  font-weight: 400;
   color: var(--gold);
 }
 .pledge-sign {
@@ -1186,11 +1198,10 @@ img { max-width: 100%; display: block; }
 .footer-brand { display: flex; align-items: center; gap: 10px; }
 .footer-brand b { color: var(--fg); }
 .footer-author {
-  font-family: 'Fraunces', serif;
+  font-family: 'Instrument Serif', serif;
   font-weight: 400;
-  font-variation-settings: 'SOFT' 30;
   font-style: italic;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--fg);
 }
 .footer-author b { font-style: normal; color: var(--coral); }

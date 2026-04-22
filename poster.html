@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..900,30..100;1,9..144,400..900,30..100&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -28,7 +28,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
     background: #2a2723;
     color: var(--ink);
     padding: 40px 20px;
@@ -80,18 +80,21 @@
     font-weight: 600;
   }
 
-  /* ==== POSTER (A3 ratio: 1 : √2 ≈ 1.414) ==== */
+  /* ==== POSTER (strict A3 ratio: 1 : √2 ≈ 1.4142) ==== */
   .poster {
     width: 800px;
-    min-height: 1131px;
+    height: 1131px;          /* strict A3 */
     background: var(--cream);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     box-shadow:
       0 40px 80px -20px rgba(0,0,0,.6),
       0 10px 30px rgba(0,0,0,.3);
     border-radius: 4px;
   }
+  .poster > * { flex-shrink: 0; }
 
   /* Paper texture (subtle grain) */
   .poster::before {
@@ -108,7 +111,7 @@
 
   /* ====== TOP HEADER BAR ====== */
   .header-bar {
-    padding: 26px 50px 20px;
+    padding: 20px 48px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -136,11 +139,13 @@
     gap: 12px;
   }
   .issue-num {
-    font-family: 'Anton', sans-serif;
-    font-size: 40px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 20;
+    font-size: 38px;
     line-height: 1;
     color: var(--coral);
-    letter-spacing: -1px;
+    letter-spacing: -2px;
   }
   .issue-meta {
     display: flex;
@@ -156,9 +161,9 @@
     text-transform: uppercase;
   }
   .issue-meta .val {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--ink);
   }
   .issue-stamp::before {
@@ -170,12 +175,13 @@
 
   /* ====== HERO SECTION ====== */
   .hero {
-    padding: 28px 50px 24px;
+    padding: 22px 48px 20px;
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    gap: 36px;
+    gap: 32px;
     align-items: end;
     position: relative;
+    flex: 1;
   }
 
   .eyebrow {
@@ -183,21 +189,27 @@
     padding: 5px 12px;
     background: var(--ink);
     color: var(--cream);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 3px;
     border-radius: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .hero h1 {
-    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
-    font-weight: 400;
-    font-size: 74px;
-    line-height: .92;
-    letter-spacing: -1px;
+    font-family: 'Fraunces', 'Playfair Display', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+    font-size: 70px;
+    line-height: .94;
+    letter-spacing: -2.5px;
     color: var(--ink);
-    text-transform: uppercase;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    letter-spacing: -1px;
   }
   .hero h1 .coral { color: var(--coral); }
   .hero h1 .teal  { color: var(--teal); }
@@ -206,9 +218,10 @@
     -webkit-text-stroke: 1.5px var(--ink);
   }
   .hero .lede {
-    font-family: 'DM Serif Display', serif;
-    font-size: 19px;
-    line-height: 1.35;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.32;
     color: var(--muted);
     max-width: 340px;
   }
@@ -267,7 +280,7 @@
 
   /* ====== BIG STAT STRIP ====== */
   .strip {
-    padding: 26px 50px;
+    padding: 20px 48px;
     border-top: 1px solid rgba(0,0,0,.08);
     border-bottom: 1px solid rgba(0,0,0,.08);
     display: flex;
@@ -276,14 +289,17 @@
     background: var(--paper);
     position: relative;
   }
-  .strip-item { flex: 1; padding-right: 20px; }
+  .strip-item { flex: 1; padding-right: 18px; }
   .strip-item:last-child { padding-right: 0; }
   .strip-num {
-    font-family: 'Anton', sans-serif;
-    font-size: 56px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 20;
+    font-size: 52px;
     line-height: 1;
     color: var(--coral);
     margin-bottom: 4px;
+    letter-spacing: -2px;
   }
   .strip-item:nth-child(2) .strip-num { color: var(--teal); }
   .strip-item:nth-child(3) .strip-num { color: var(--ink); }
@@ -303,33 +319,41 @@
 
   /* ====== STRATEGY CARDS ====== */
   .cards {
-    padding: 22px 50px 16px;
+    padding: 18px 48px 12px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 16px;
   }
   .card {
-    padding: 24px 24px 22px;
-    border-radius: 18px;
+    padding: 20px 22px 18px;
+    border-radius: 16px;
     position: relative;
     overflow: hidden;
   }
   .card .tag {
     display: inline-block;
-    font-family: 'Anton', sans-serif;
-    font-size: 13px;
-    letter-spacing: 3px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 2.5px;
     padding: 4px 10px;
     border-radius: 4px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
   }
   .card h3 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    line-height: 1.15;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-variation-settings: 'opsz' 144, 'SOFT' 40;
+    font-size: 23px;
+    line-height: 1.1;
     margin-bottom: 8px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.8px;
+  }
+  .card h3 em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
   }
   .card p {
     font-size: 13px;
@@ -352,30 +376,37 @@
 
   /* ====== SOURCES / RESEARCH BAND ====== */
   .sources {
-    margin: 0 50px 20px;
-    padding: 18px 22px;
+    margin: 0 48px 14px;
+    padding: 14px 20px;
     background: var(--paper);
     border: 1px dashed rgba(0,0,0,.18);
-    border-radius: 16px;
+    border-radius: 14px;
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 18px;
+    gap: 16px;
     align-items: center;
   }
   .sources-kicker {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding-right: 18px;
-    border-right: 1px solid var(--line);
+    gap: 3px;
+    padding-right: 16px;
+    border-right: 1px solid rgba(0,0,0,.12);
   }
   .sources-kicker .sk-top {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
     font-size: 22px;
-    line-height: 1;
-    letter-spacing: .5px;
+    line-height: .95;
+    letter-spacing: -0.6px;
     color: var(--ink);
-    text-transform: uppercase;
+  }
+  .sources-kicker .sk-top em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    color: var(--coral);
   }
   .sources-kicker .sk-bot {
     font-size: 9px;
@@ -413,14 +444,14 @@
 
   /* ====== QR / CTA BAR ====== */
   .cta-bar {
-    margin: 0 50px;
+    margin: 0 48px;
     background: var(--ink);
     color: var(--cream);
-    border-radius: 20px;
-    padding: 22px 26px;
+    border-radius: 18px;
+    padding: 18px 24px;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: 22px;
+    gap: 20px;
     align-items: center;
     position: relative;
     overflow: hidden;
@@ -444,33 +475,43 @@
   }
   .qr-wrap img {
     display: block;
-    width: 96px;
-    height: 96px;
+    width: 88px;
+    height: 88px;
   }
   .cta-text { position: relative; z-index: 2; }
   .cta-text .kicker {
-    font-family: 'Anton', sans-serif;
-    font-size: 12px;
-    letter-spacing: 3px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2.5px;
     color: var(--gold);
-    margin-bottom: 4px;
-  }
-  .cta-text h2 {
-    font-family: 'Anton', sans-serif;
-    font-size: 30px;
-    line-height: 1;
-    letter-spacing: .5px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     text-transform: uppercase;
   }
+  .cta-text h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -1.2px;
+    margin-bottom: 4px;
+  }
+  .cta-text h2 em {
+    font-style: italic;
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    color: var(--gold);
+  }
   .cta-text p {
-    font-size: 13px;
+    font-size: 12.5px;
     opacity: .8;
     line-height: 1.35;
   }
   .arrow-big {
-    font-family: 'Anton', sans-serif;
-    font-size: 56px;
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 54px;
     color: var(--gold);
     line-height: 1;
     position: relative;
@@ -484,7 +525,7 @@
 
   /* ====== FOOTER ====== */
   .footer {
-    padding: 18px 50px 22px;
+    padding: 14px 48px 16px;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -494,14 +535,14 @@
     font-weight: 600;
   }
   .footer .author {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--ink);
     letter-spacing: 0;
     font-weight: 400;
   }
-  .footer .author b { font-style: normal; }
+  .footer .author b { font-style: normal; font-weight: 400; }
   .refs { font-size: 9px; opacity: .7; }
 
   /* ====== Responsive scale-down for small screens ====== */
@@ -510,11 +551,11 @@
     .poster {
       width: 100%;
       height: auto;
-      aspect-ratio: 800 / 1131;
+      aspect-ratio: 1 / 1.4142;   /* strict A3 */
     }
-    .hero h1 { font-size: 9vw; }
-    .hero .lede { font-size: 2.3vw; }
-    .strip-num { font-size: 7vw; }
+    .hero h1 { font-size: 8.2vw; }
+    .hero .lede { font-size: 2.5vw; }
+    .strip-num { font-size: 6.5vw; }
     .cta-text h2 { font-size: 4vw; }
   }
 </style>
@@ -554,9 +595,10 @@
       <span class="eyebrow">STOP OVERSHARING</span>
       <h1>
         Every <span class="coral">post</span><br>
-        you share<br>
-        is a <span class="outline">puzzle</span><br>
-        piece <span class="teal">someone<br>else</span> collects.
+        you share is<br>
+        a <em>puzzle</em> piece<br>
+        <span class="teal">someone else</span><br>
+        collects.
       </h1>
       <p class="lede">An 18-year-old posts six times a day. That's 2,190 puzzle pieces a year — enough to rebuild a stranger's life.</p>
     </div>
@@ -601,13 +643,13 @@
   <!-- CARDS -->
   <div class="cards">
     <div class="card card-coral">
-      <span class="tag">⚡ RECIPROCITY</span>
-      <h3>A free 60-second<br>privacy check, just for you.</h3>
+      <span class="tag">⚡ Reciprocity</span>
+      <h3>A <em>free</em> 60-second<br>privacy check, just for you.</h3>
       <p>Scan to play our quick privacy game and chat with an AI. No sign-up. Your data stays on your device.</p>
     </div>
     <div class="card card-teal">
-      <span class="tag">✓ CONSISTENCY</span>
-      <h3>You don't have to<br>quit social media.</h3>
+      <span class="tag">✓ Consistency</span>
+      <h3>You don't have to<br><em>quit</em> social media.</h3>
       <p>Just adjust one small setting tonight. Small yes leads to bigger yes. (Jia &amp; Xu, 2016)</p>
     </div>
   </div>
@@ -615,7 +657,7 @@
   <!-- SOURCES / RESEARCH -->
   <div class="sources">
     <div class="sources-kicker">
-      <span class="sk-top">Based on<br>research</span>
+      <span class="sk-top">Based on<br><em>research</em></span>
       <span class="sk-bot">Peer-reviewed · 3 sources</span>
     </div>
     <div class="sources-list">
@@ -643,8 +685,8 @@
       <img src="qrcode.png" alt="QR code to useriiiis.github.io/test-repo-2026">
     </div>
     <div class="cta-text">
-      <div class="kicker">FREE · 60 SECONDS · NO SIGN-UP</div>
-      <h2>Scan me.<br>Protect yourself.</h2>
+      <div class="kicker">Free · 60 Seconds · No Sign-up</div>
+      <h2>Scan me.<br><em>Protect</em> yourself.</h2>
       <p>Play the privacy game. Chat with Privacy AI. Change one setting tonight.</p>
     </div>
     <div class="arrow-big">→</div>
@@ -696,11 +738,9 @@
       const canvas = await renderCanvas();
       const imgData = canvas.toDataURL('image/jpeg', 0.95);
       const { jsPDF } = window.jspdf;
-      // Match real canvas ratio; width = A3 297mm, height scales
-      const mmWidth = 297;
-      const mmHeight = (canvas.height / canvas.width) * mmWidth;
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: [mmWidth, mmHeight] });
-      pdf.addImage(imgData, 'JPEG', 0, 0, mmWidth, mmHeight);
+      // Standard A3 portrait: 297 x 420 mm
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a3' });
+      pdf.addImage(imgData, 'JPEG', 0, 0, 297, 420);
       pdf.save('stop-oversharing-poster-by-Mikey.pdf');
     } catch (e) {
       alert('Download failed: ' + e.message);
