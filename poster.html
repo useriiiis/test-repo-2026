@@ -386,7 +386,7 @@
   /* ====== SOURCES / RESEARCH BAND ====== */
   .sources {
     margin: 0 48px 10px;
-    padding: 12px 18px;
+    padding: 12px 18px 10px;
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -417,8 +417,8 @@
     color: var(--blue);
   }
   .sources-kicker .sk-bot {
-    font-size: 9px;
-    letter-spacing: 2px;
+    font-size: 9.5px;
+    letter-spacing: 1.6px;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
@@ -429,14 +429,14 @@
     gap: 10px;
   }
   .src-item {
-    font-size: 10.5px;
-    line-height: 1.35;
+    font-size: 12px;
+    line-height: 1.28;
     color: var(--ink);
   }
   .src-item b {
     display: block;
     color: var(--coral);
-    font-size: 11px;
+    font-size: 12.5px;
     margin-bottom: 2px;
     letter-spacing: .2px;
   }
@@ -446,9 +446,13 @@
     display: block;
     font-style: italic;
     color: var(--muted);
-    font-size: 10px;
+    font-size: 10.5px;
     margin-top: 2px;
   }
+  .hl-coral { color: var(--coral); font-weight: 800; }
+  .hl-blue  { color: var(--blue); font-weight: 800; }
+  .hl-teal  { color: var(--teal); font-weight: 800; }
+  .hl-gold  { color: var(--gold); font-weight: 800; }
 
   /* ====== CTA BAR (text → arrow → QR) ====== */
   .cta-bar {
@@ -485,8 +489,8 @@
   .cta-text .kicker {
     font-family: 'Manrope', sans-serif;
     font-weight: 700;
-    font-size: 10px;
-    letter-spacing: 2.5px;
+    font-size: 11px;
+    letter-spacing: 2.2px;
     color: var(--gold);
     margin-bottom: 4px;
     text-transform: uppercase;
@@ -494,7 +498,7 @@
   .cta-text h2 {
     font-family: 'Source Serif 4', Georgia, serif;
     font-weight: 800;
-    font-size: 27px;
+    font-size: 29px;
     line-height: 1.02;
     letter-spacing: -.8px;
     margin-bottom: 5px;
@@ -506,7 +510,7 @@
     color: var(--gold);
   }
   .cta-text p {
-    font-size: 13.5px;
+    font-size: 15px;
     font-weight: 700;
     color: #ffffff;
     opacity: 1;
@@ -534,7 +538,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 10px;
+    font-size: 10.8px;
     color: var(--muted);
     letter-spacing: 1.5px;
     font-weight: 600;
@@ -548,7 +552,7 @@
     font-weight: 700;
   }
   .footer .author b { font-style: normal; font-weight: 800; }
-  .refs { font-size: 9px; opacity: .7; }
+  .refs { font-size: 9.8px; opacity: .85; }
 
   /* ====== Mobile: keep poster design intact, just tweak chrome ====== */
   @media (max-width: 900px) {
@@ -672,17 +676,17 @@
     <div class="sources-list">
       <div class="src-item">
         <b>Zhu et al. (2025)</b>
-        Social-media openness significantly raises identity-theft and unlawful data-access risk.
+        Social-media openness raises <span class="hl-coral">identity-theft</span> and <span class="hl-coral">data-access</span> risk.
         <i>Poll · Computers &amp; Security</i>
       </div>
       <div class="src-item">
         <b>Nicol et al. (2022)</b>
-        Combined digital traces across Facebook, LinkedIn &amp; Tinder reveal unexpected private details.
+        Combined <span class="hl-blue">digital traces</span> reveal unexpected <span class="hl-blue">private details</span>.
         <i>New Media &amp; Society</i>
       </div>
       <div class="src-item">
         <b>Jia &amp; Xu (2016)</b>
-        Adjusting privacy settings reduces risk while keeping social connections alive.
+        Adjusting <span class="hl-teal">privacy settings</span> reduces risk while keeping connections alive.
         <i>Information Systems Research</i>
       </div>
     </div>
@@ -693,7 +697,7 @@
     <div class="cta-text">
       <div class="kicker">Tonight · One Small Change</div>
       <h2>Don't overshare. <em>Protect</em> yourself.</h2>
-      <p>Scan · play the game · chat with the Privacy AI.</p>
+      <p><span class="hl-gold">Scan</span> · play the game · chat with the <span class="hl-gold">Privacy AI</span>.</p>
     </div>
     <div class="arrow-big">→</div>
     <div class="cta-qr">
