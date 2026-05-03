@@ -12,7 +12,11 @@ const LB_ENDPOINT = 'https://jsonblob.com/api/jsonBlob/019db646-9c74-704b-be9c-7
 // ^ dedicated public blob for this project's leaderboard (works with GET + PUT, no auth).
 //   If blob is gone / rate-limited, local leaderboard still works.
 
-const LB_LOCAL_KEY = 'oversharing.lb.local.v2';
+const LB_LOCAL_KEY = 'oversharing.lb.local.v3';
+const LB_OLD_LOCAL_KEYS = [
+  'oversharing.lb.local.v1',
+  'oversharing.lb.local.v2'
+];
 const LB_POLL_MS = 15000;      // auto-refresh every 15 s
 let globalBoardCache = null;
 let lastFetchTs = 0;
@@ -62,6 +66,11 @@ function getLocalBoard() {
   try {
     return JSON.parse(localStorage.getItem(LB_LOCAL_KEY) || '[]');
   } catch { return []; }
+}
+function clearOldLeaderboardCache() {
+  try {
+    LB_OLD_LOCAL_KEYS.forEach(key => localStorage.removeItem(key));
+  } catch {}
 }
 function saveLocalBoard(entry) {
   const arr = getLocalBoard();
@@ -149,6 +158,7 @@ let timerId = null;
 let playerName = '';
 
 function bootGameUI() {
+  clearOldLeaderboardCache();
   document.getElementById('game-start').classList.remove('hidden');
   document.getElementById('game-play').classList.add('hidden');
   document.getElementById('game-end').classList.add('hidden');
